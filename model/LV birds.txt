@@ -1,0 +1,381 @@
+Branta bernicla	Melngalvas zoss
+Branta ruficollis	Sarkankakla zoss
+Branta canadensis	Kanādas zoss
+Branta leucopsis	Baltvaigu zoss
+Anser anser	Meža zoss
+Anser fabalis	Taigas sējas zoss
+Anser brachyrhynchus	Īsknābja zoss
+Anser serrirostris	Tundras sējas zoss
+Anser albifrons	Baltpieres zoss
+Anser erythropus	Mazā zoss
+Cygnus olor	Paugurknābja gulbis
+Cygnus columbianus	Mazais gulbis
+Cygnus cygnus	Ziemeļu gulbis
+Tadorna tadorna	Sāmsalas dižpīle
+Tadorna ferruginea	Rudā dižpīle
+Spatula querquedula	Prīkšķe
+Spatula clypeata	Platknābis
+Mareca strepera	Pelēkā pīle
+Mareca penelope	Baltvēderis
+Anas platyrhynchos	Meža pīle
+Anas acuta	Garkaklis
+Anas crecca	Krīklis
+Netta rufina	Lielgalvis
+Aythya ferina	Brūnkaklis
+Aythya nyroca	Baltacis
+Aythya collaris	Gredzenpīle
+Aythya fuligula	Cekulpīle
+Aythya marila	Ķerra
+Polysticta stelleri	Stellera pūkpīle
+Somateria spectabilis	Krāšņā pūkpīle
+Somateria mollissima	Parastā pūkpīle
+Histrionicus histrionicus	Arlekīnpīle
+Melanitta perspicillata	Bangu pīle
+Melanitta fusca	Tumšā pīle
+Melanitta stejnegeri	Stejnegera pīle
+Melanitta nigra	Melnā pīle
+Melanitta americana	Amerikas melnā pīle
+Clangula hyemalis	Kākaulis
+Bucephala clangula	Gaigala
+Mergellus albellus	Mazā gaura
+Mergus merganser	Lielā gaura
+Mergus serrator	Garknābja gaura
+Oxyura leucocephala	Baltgalvas zilknābis
+Tetrastes bonasia	Mežirbe
+Lagopus lagopus	Baltirbe
+Tetrao urogallus	Mednis
+Lyrurus tetrix	Rubenis
+Perdix perdix	Laukirbe
+Coturnix coturnix	Paipala
+Caprimulgus europaeus	Vakarlēpis
+Apus apus	Svīre
+Otis tarda	Lielā sīga
+Chlamydotis macqueenii	Apkakles sīga
+Tetrax tetrax	Mazā sīga
+Cuculus canorus	Dzeguze
+Syrrhaptes paradoxus	Stepes smilšvistiņa
+Columba livia	Mājas balodis
+Columba oenas	Meža balodis
+Columba palumbus	Lauku balodis
+Streptopelia turtur	Parastā ūbele
+Streptopelia orientalis	Austrumu ūbele
+Streptopelia decaocto	Gredzenūbele
+Rallus aquaticus	Dumbrcālis
+Crex crex	Grieze
+Porzana porzana	Ormanītis
+Gallinula chloropus	Ūdensvistiņa
+Fulica atra	Laucis
+Zapornia pusilla	Ceru ormanītis
+Zapornia parva	Mazais ormanītis
+Grus grus	Dzērve
+Tachybaptus ruficollis	Mazais dūkuris
+Podiceps grisegena	Pelēkvaigu dūkuris
+Podiceps cristatus	Cekuldūkuris
+Podiceps auritus	Ragainais dūkuris
+Podiceps nigricollis	Melnkakla dūkuris
+Haematopus ostralegus	Jūras žagata
+Himantopus himantopus	Garstilbis
+Recurvirostra avosetta	Avozeta
+Pluvialis squatarola	Jūras ķīvīte
+Pluvialis apricaria	Dzeltenais tārtiņš
+Pluvialis fulva	Tundras tārtiņš
+Eudromias morinellus	Morinella tārtiņš
+Charadrius hiaticula	Smilšu tārtiņš
+Thinornis dubius	Upes tārtiņš
+Vanellus vanellus	Ķīvīte
+Anarhynchus leschenaultii	Tuksneša tārtiņš
+Anarhynchus alexandrinus	Jūras tārtiņš
+Numenius phaeopus	Lietuvainis
+Numenius arquata	Kuitala
+Limosa lapponica	Sarkanā puskuitala
+Limosa limosa	Melnā puskuitala
+Lymnocryptes minimus	Vistilbe
+Scolopax rusticola	Sloka
+Gallinago media	Ķikuts
+Gallinago gallinago	Mērkaziņa
+Phalaropus fulicarius	Platknābja pūslītis
+Phalaropus lobatus	Šaurknābja pūslītis
+Xenus cinereus	Terekija
+Actitis hypoleucos	Upes tilbīte
+Tringa ochropus	Meža tilbīte
+Tringa stagnatilis	Dīķu tilbīte
+Tringa glareola	Purva tilbīte
+Tringa totanus	Pļavu tilbīte
+Tringa erythropus	Tumšā tilbīte
+Tringa nebularia	Lielā tilbīte
+Arenaria interpres	Akmeņtārtiņš
+Calidris tenuirostris	Garknābja šņibītis
+Calidris canutus	Lielais šņibītis
+Calidris pugnax	Gugatnis
+Calidris falcinellus	Dūņšņibītis
+Calidris ferruginea	Līkšņibītis
+Calidris temminckii	Temminka šņibītis
+Calidris alba	Gaišais šņibītis
+Calidris alpina	Parastais šņibītis
+Calidris maritima	Jūras šņibītis
+Calidris minuta	Trulītis
+Calidris melanotos	Tundras šņibītis
+Glareola nordmanni	Melnspārnu bezdelīgtārtiņš
+Glareola pratincola	Brūnspārnu bezdelīgtārtiņš
+Sternula albifrons	Mazais zīriņš
+Hydroprogne caspia	Lielais zīriņš
+Chlidonias hybrida	Baltvaigu zīriņš
+Chlidonias niger	Melnais zīriņš
+Chlidonias leucopterus	Baltspārnu zīriņš
+Sterna paradisaea	Jūras zīriņš
+Sterna hirundo	Upes zīriņš
+Thalasseus sandvicensis	Cekulzīriņš
+Hydrocoloeus minutus	Mazais ķīris
+Rhodostethia rosea	Sārtā kaija
+Rissa tridactyla	Trīspirkstu kaija
+Xema sabini	Šķeltastes kaija
+Chroicocephalus ridibundus	Lielais ķīris
+Leucophaeus atricilla	Acteku kaija
+Ichthyaetus ichthyaetus	Zivju kaija
+Ichthyaetus melanocephalus	Melngalvas kaija
+Larus canus	Kajaks
+Larus delawarensis	Gredzenknābja kaija
+Larus cachinnans	Kaspijas kaija
+Larus argentatus	Sudrabkaija
+Larus michahellis	Vidusjūras kaija
+Larus marinus	Melnspārnu kaija
+Larus hyperboreus	Lielā polārkaija
+Larus fuscus	Reņģu kaija
+Larus schistisagus	Kamčatkas kaija
+Larus glaucoides	Mazā polārkaija
+Stercorarius longicaudus	Garastes klijkaija
+Stercorarius parasiticus	Īsastes klijkaija
+Stercorarius pomarinus	Vidējā klijkaija
+Stercorarius skua	Lielā klijkaija
+Cepphus grylle	Melnais alks
+Alca torda	Lielais alks
+Alle alle	Mazais alks
+Uria aalge	Tievknābja kaira
+Gavia stellata	Brūnkakla gārgale
+Gavia arctica	Melnkakla gārgale
+Gavia immer	Polārā gārgale
+Gavia adamsii	Dzeltenknābja gārgale
+Hydrobates leucorhous	Ziemeļu vētrasburātājs
+Ardenna grisea	Tumšais vētrasputns
+Ciconia nigra	Melnais stārķis
+Ciconia ciconia	Baltais stārķis
+Morus bassanus	Ziemeļu sulla
+Microcarbo pygmeus	Mazais jūras krauklis
+Phalacrocorax carbo	Jūras krauklis
+Plegadis falcinellus	Brūnais ibiss
+Platalea leucorodia	Karošknābis
+Botaurus stellaris	Lielais dumpis
+Botaurus minutus	Mazais dumpis
+Nycticorax nycticorax	Nakts gārnis
+Egretta garzetta	Zīda gārnis
+Ardeola ralloides	Dzeltenais gārnis
+Ardea alba	Lielais baltais gārnis
+Ardea ibis	Lopu gārnis
+Ardea cinerea	Zivju gārnis
+Pelecanus onocrotalus	Sārtais pelikāns
+Pelecanus crispus	Cirtainais pelikāns
+Pandion haliaetus	Zivjērglis
+Elanus caeruleus	Melnplecu klija
+Pernis apivorus	Ķīķis
+Gyps fulvus	Baltgalvas grifs
+Aegypius monachus	Melnais grifs
+Circaetus gallicus	Čūskērglis
+Clanga pomarina	Mazais ērglis
+Clanga clanga	Vidējais ērglis
+Hieraaetus pennatus	Pundurērglis
+Aquila nipalensis	Stepes ērglis
+Aquila heliaca	Karaliskais ērglis
+Aquila chrysaetos	Klinšu ērglis
+Aquila fasciata	Svītrainais ērglis
+Accipiter nisus	Zvirbuļu vanags
+Astur gentilis	Vistu vanags
+Circus aeruginosus	Niedru lija
+Circus cyaneus	Lauku lija
+Circus macrourus	Stepes lija
+Circus pygargus	Pļavu lija
+Milvus milvus	Sarkanā klija
+Milvus migrans	Melnā klija
+Haliaeetus albicilla	Jūras ērglis
+Buteo lagopus	Bikšainais klijāns
+Buteo buteo	Peļu klijāns
+Buteo rufinus	Garkāju klijāns
+Tyto alba	Plīvurpūce
+Aegolius funereus	Bikšainais apogs
+Athene noctua	Mājas apogs
+Surnia ulula	Svītrainā pūce
+Glaucidium passerinum	Apodziņš
+Otus scops	Mazā ausainā pūcīte
+Asio otus	Ausainā pūce
+Asio flammeus	Purva pūce
+Bubo scandiacus	Baltā pūce
+Bubo bubo	Ūpis
+Strix aluco	Meža pūce
+Strix uralensis	Urālpūce
+Strix nebulosa	Ziemeļpūce
+Upupa epops	Pupuķis
+Coracias garrulus	Zaļā vārna
+Alcedo atthis	Zivju dzenītis
+Merops apiaster	Bišu dzenis
+Jynx torquilla	Tītiņš
+Picoides tridactylus	Trīspirkstu dzenis
+Dendrocoptes medius	Vidējais dzenis
+Dryobates minor	Mazais dzenis
+Dendrocopos major	Dižraibais dzenis
+Dendrocopos leucotos	Baltmugurdzenis
+Dryocopus martius	Melnā dzilna
+Picus viridis	Zaļā dzilna
+Picus canus	Pelēkā dzilna
+Falco tinnunculus	Lauku piekūns
+Falco vespertinus	Kukaiņu piekūns
+Falco columbarius	Purva piekūns
+Falco subbuteo	Bezdelīgu piekūns
+Falco cherrug	Stepes piekūns
+Falco rusticolus	Medību piekūns
+Falco peregrinus	Lielais piekūns
+Oriolus oriolus	Vālodze
+Lanius excubitor	Lielā čakste
+Lanius minor	Melnpieres čakste
+Lanius isabellinus	Daurijas čakste
+Lanius collurio	Brūnā čakste
+Lanius phoenicuroides	Rudastes čakste
+Perisoreus infaustus	Bēdrozis
+Garrulus glandarius	Sīlis
+Pica pica	Žagata
+Nucifraga caryocatactes	Riekstrozis
+Coloeus monedula	Kovārnis
+Corvus frugilegus	Krauķis
+Corvus corone	Melnā vārna
+Corvus cornix	Pelēkā vārna
+Corvus corax	Krauklis
+Bombycilla garrulus	Zīdaste
+Periparus ater	Meža zīlīte
+Lophophanes cristatus	Cekulzīlīte
+Poecile palustris	Purva zīlīte
+Poecile montanus	Pelēkā zīlīte
+Cyanistes caeruleus	Zilzīlīte
+Cyanistes cyanus	Gaišzilā zīlīte
+Parus major	Lielā zīlīte
+Remiz pendulinus	Somzīlīte
+Panurus biarmicus	Bārdzīlīte
+Lullula arborea	Sila cīrulis
+Alauda arvensis	Lauku cīrulis
+Galerida cristata	Cekulainais cīrulis
+Eremophila alpestris	Ausainais cīrulis
+Calandrella brachydactyla	Īspirkstu cīrulis
+Riparia riparia	Krastu čurkste
+Hirundo rustica	Bezdelīga
+Delichon urbicum	Mājas čurkste
+Cecropis rufula	Vidusjūras bezdelīga
+Cettia cetti	Cetija
+Aegithalos caudatus	Garastīte
+Phylloscopus sibilatrix	Svirlītis
+Phylloscopus bonelli	Bonelli ķauķītis
+Phylloscopus humei	Hjūma ķauķītis
+Phylloscopus inornatus	Dzeltensvītru ķauķītis
+Phylloscopus proregulus	Sibīrijas ķauķītis
+Phylloscopus schwarzi	Švarca ķauķītis
+Phylloscopus fuscatus	Tumšais ķauķītis
+Phylloscopus trochilus	Vītītis
+Phylloscopus collybita	Čuņčiņš
+Phylloscopus trochiloides	Zaļais ķauķītis
+Phylloscopus borealis	Ziemeļu ķauķītis
+Acrocephalus arundinaceus	Niedru strazds
+Acrocephalus paludicola	Grīšļu ķauķis
+Acrocephalus schoenobaenus	Ceru ķauķis
+Acrocephalus agricola	Palieņu ķauķis
+Acrocephalus dumetorum	Krūmu ķauķis
+Acrocephalus scirpaceus	Ezeru ķauķis
+Acrocephalus palustris	Purva ķauķis
+Iduna caligata	Klusais ķauķis
+Hippolais icterina	Iedzeltenais ķauķis
+Helopsaltes certhiola	Pallasa ķauķis
+Locustella lanceolata	Lāsainais ķauķis
+Locustella fluviatilis	Upes ķauķis
+Locustella luscinioides	Seivi ķauķis
+Locustella naevia	Kārklu ķauķis
+Sylvia atricapilla	Melngalvas ķauķis
+Sylvia borin	Dārza ķauķis
+Curruca nisoria	Svītrainais ķauķis
+Curruca curruca	Gaišais ķauķis
+Curruca nana	Āzijas tuksneša ķauķis
+Curruca communis	Brūnspārnu ķauķis
+Regulus ignicapilla	Sārtgalvītis
+Regulus regulus	Zeltgalvītis
+Troglodytes troglodytes	Paceplītis
+Sitta europaea	Dzilnītis
+Certhia familiaris	Mizložņa
+Certhia brachydactyla	Īspirkstu mizložņa
+Pastor roseus	Sārtais strazds
+Sturnus vulgaris	Mājas strazds
+Zoothera aurea	Raibais zemesstrazds
+Turdus philomelos	Dziedātājstrazds
+Turdus viscivorus	Sila strazds
+Turdus iliacus	Plukšķis
+Turdus merula	Melnais meža strazds
+Turdus pilaris	Pelēkais strazds
+Turdus torquatus	Apkakles strazds
+Turdus atrogularis	Melnrīkles strazds
+Muscicapa striata	Pelēkais mušķērājs
+Erithacus rubecula	Sarkanrīklīte
+Luscinia luscinia	Lakstīgala
+Luscinia megarhynchos	Rietumu lakstīgala
+Luscinia svecica	Zilrīklīte
+Calliope calliope	Sibīrijas rubīnrīklīte
+Ficedula parva	Mazais mušķērājs
+Ficedula hypoleuca	Melnais mušķērājs
+Ficedula albicollis	Baltkakla mušķērājs
+Tarsiger cyanurus	Rudsānu zilastīte
+Phoenicurus ochruros	Melnais erickiņš
+Phoenicurus phoenicurus	Erickiņš
+Saxicola rubetra	Lukstu čakstīte
+Saxicola maurus	Sibīrijas čakstīte
+Saxicola rubicola	Tumšā čakstīte
+Oenanthe oenanthe	Akmeņčakstīte
+Oenanthe isabellina	Smiltāju čakstīte
+Oenanthe deserti	Tuksneša čakstīte
+Oenanthe pleschanka	Daglā čakstīte
+Cinclus cinclus	Ūdensstrazds
+Passer montanus	Lauku zvirbulis
+Passer domesticus	Mājas zvirbulis
+Prunella montanella	Sibīrijas peļkājīte
+Prunella modularis	Peļkājīte
+Motacilla flava	Dzeltenā cielava
+Motacilla citreola	Citroncielava
+Motacilla cinerea	Pelēkā cielava
+Motacilla alba	Baltā cielava
+Anthus richardi	Lielā čipste
+Anthus campestris	Stepes čipste
+Anthus pratensis	Pļavu čipste
+Anthus trivialis	Koku čipste
+Anthus hodgsoni	Taigas čipste
+Anthus cervinus	Sarkanrīkles čipste
+Anthus spinoletta	Ūdeņu čipste
+Anthus petrosus	Akmeņu čipste
+Fringilla coelebs	Žubīte
+Fringilla montifringilla	Ziemas žubīte
+Coccothraustes coccothraustes	Dižknābis
+Pinicola enucleator	Ziemeļu svilpis
+Pyrrhula pyrrhula	Svilpis
+Carpodacus erythrinus	Mazais svilpis
+Chloris chloris	Zaļžubīte
+Linaria flavirostris	Kalnu ķeģis
+Linaria cannabina	Kaņepītis
+Acanthis flammea	Parastais ķeģis
+Loxia pytyopsittacus	Priežu krustknābis
+Loxia curvirostra	Egļu krustknābis
+Loxia leucoptera	Baltsvītru krustknābis
+Carduelis carduelis	Dadzītis
+Serinus serinus	Ģirlicis
+Spinus spinus	Ķivulis
+Calcarius lapponicus	Lapzemes stērste
+Plectrophenax nivalis	Sniedze
+Emberiza calandra	Lielā stērste
+Emberiza citrinella	Dzeltenā stērste
+Emberiza leucocephalos	Priežu stērste
+Emberiza hortulana	Dārza stērste
+Emberiza pusilla	Mazā stērste
+Emberiza rustica	Meža stērste
+Emberiza aureola	Birztalu stērste
+Emberiza melanocephala	Melngalvas stērste
+Emberiza schoeniclus	Niedru stērste
+	
