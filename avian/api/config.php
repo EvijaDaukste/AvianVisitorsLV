@@ -160,7 +160,7 @@ function admin_state_revision(array $state): string {
 // Tight allowlist for string fields. The root-owned writer repeats the same
 // validation before it touches birdnet.conf.
 function safe_string_value(string $v): bool {
-    return (bool)preg_match("/^[A-Za-z0-9 _.,'-]*$/u", $v);
+    return (bool)preg_match('/^[\p{L}\p{M}0-9 _.,-]*$/u', $v);
 }
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';

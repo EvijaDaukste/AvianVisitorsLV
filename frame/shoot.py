@@ -51,6 +51,15 @@ HIDE_CSS = """
 
 def _frame_css(headline_px, eyebrow_px, lowercase, pad_top, pad_side, pad_bottom, collage_vh):
     css = (
+        "html, body, .stage, .views, .view0 {"
+        "background-color: #f3eee2 !important;"
+        "background-image:"
+        "radial-gradient(ellipse at 18% 22%, rgba(150,120,72,0.035) 0%, transparent 35%),"
+        "radial-gradient(ellipse at 78% 68%, rgba(122,91,51,0.028) 0%, transparent 38%),"
+        "repeating-linear-gradient(3deg, rgba(96,76,46,0.012) 0px, rgba(96,76,46,0.012) 1px, transparent 1px, transparent 5px),"
+        "repeating-linear-gradient(87deg, rgba(255,255,255,0.075) 0px, rgba(255,255,255,0.075) 1px, transparent 1px, transparent 7px) !important;"
+        "background-attachment: fixed !important;"
+        "}"
         f".stage {{ padding: {pad_top}px {pad_side}px {pad_bottom}px !important;"
         f" box-sizing: border-box !important; justify-content: center !important; }}"
         f".views {{ flex: 0 0 auto !important; height: {collage_vh}vh !important; }}"

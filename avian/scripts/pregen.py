@@ -64,7 +64,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
-
+from openai import OpenAI
 # Gemini's image-out model. The endpoint changes occasionally; if you
 # get a 404 here, check Google's model catalog and bump this.
 GEMINI_URL = (
@@ -400,124 +400,84 @@ def gen_one(
     species_note: str | None = None,
     style_ref: Path | None = None,
 ) -> bytes:
-    """Single Gemini call with bounded retry on 429 + transient 5xx.
-    Returns raw PNG bytes.
+    """Generate one bird illustration with OpenAI using reference images."""
 
-    positive_ref: Wikipedia/Audubon photo of the target species.
-    anti_ref: lookalike photo to attach as IMAGE 2. The companion
-              anti_ref_key (a key into ANTI_REFS) must match what's in
-              the file - it drives the IMAGE 2 caption and the
-              {anti_ref_line} substitution in the prompt body. Pass
-              both or neither; passing the path without the key would
-              caption the image as an unnamed "another species".
-    species_note: optional 1-2 sentence clarifier for difficult species,
-                  appended as the last paragraph before the reference
-                  block.
-    """
-    body = (prompt
-            .replace("{sci_name}", sci)
-            .replace("{com_name}", com)
-            .replace("{pose}", POSES[pose])
-            .replace("{anti_ref_line}", _anti_ref_line(anti_ref_key)))
-    if species_note:
-        body = body + "\n\nSpecies-specific note: " + species_note
+    client = OpenAI(api_key=api_key)
 
-    parts: list[dict] = [{"text": body}]
-    if positive_ref:
-        # Downscale the anatomy reference to 384px on the long side
-        # before encoding. Big Wikipedia photos visually dominate as a
-        # style signal even though the prompt says they're anatomy-only;
-        # at 384px the model still reads species/markings/colors but
-        # has less photographic detail to mimic.
-        try:
-            from PIL import Image
-            from io import BytesIO
-            img = Image.open(positive_ref).convert("RGB")
-            w, h = img.size
-            if max(w, h) > 384:
-                scale = 384 / max(w, h)
-                img = img.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
-            buf = BytesIO()
-            img.save(buf, format="PNG", optimize=True)
-            ref_bytes = buf.getvalue()
-            ref_mime = "image/png"
-        except Exception:
-            ref_bytes = positive_ref.read_bytes()
-            ref_mime = _mime_for(positive_ref)
-        parts.append({"text": "IMAGE 1 (positive, target species):"})
-        parts.append({"inline_data": {
-            "mime_type": ref_mime,
-            "data": base64.b64encode(ref_bytes).decode(),
-        }})
-    if anti_ref:
-        anti_name = (ANTI_REFS.get(anti_ref_key or "") or {}).get(
-            "common_name", "lookalike species"
-        )
-        parts.append({"text": f"IMAGE 2 (negative, {anti_name}, do NOT copy):"})
-        parts.append({"inline_data": {
-            "mime_type": _mime_for(anti_ref),
-            "data": base64.b64encode(anti_ref.read_bytes()).decode(),
-        }})
-    if style_ref:
-        parts.append({"text": (
-            "IMAGE 3 (positive STYLE reference - Edo-period kachō-e woodblock "
-            "print). The species in IMAGE 3 is irrelevant; only its painting "
-            "technique is borrowed (flat washes, confident outlines, tonal "
-            "mineral-pigment ground). DO NOT copy any branches, leaves, water, "
-            "moon, or scenery from IMAGE 3.")})
-        parts.append({"inline_data": {
-            "mime_type": _mime_for(style_ref),
-            "data": base64.b64encode(style_ref.read_bytes()).decode(),
-        }})
+    instructions = [prompt]
 
-    payload = {
-        "contents": [{"parts": parts}],
-        # TEXT included so Gemini can surface safety messaging without
-        # rejecting the request shape (image-only sometimes errors).
-        "generationConfig": {"responseModalities": ["TEXT", "IMAGE"]},
-    }
-    # API key as header, NOT URL - keeps the key out of Google's
-    # request logs, proxy logs, and shell history.
-    req = urllib.request.Request(
-        GEMINI_URL,
-        data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
-        method="POST",
+    instructions.append(
+        f"Target species: {com} ({sci}). "
+        f"Generate pose {pose}. "
+        "The first reference image, when provided, shows the TARGET species. "
+        "Use it for species identity, plumage, proportions, markings, and anatomy. "
+        "Do not copy its photographic background or composition."
     )
 
-    backoff = 4.0
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=180) as r:
-                resp = json.loads(r.read())
-            break
-        except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504) and attempt < 3:
-                ra = e.headers.get("Retry-After")
-                try:
-                    retry_after = float(ra) if ra else backoff
-                except (TypeError, ValueError):
-                    retry_after = backoff  # HTTP-date format, fall back
-                time.sleep(retry_after)
-                backoff *= 2
-                continue
-            raise
-        except urllib.error.URLError:
-            if attempt < 3:
-                time.sleep(backoff)
-                backoff *= 2
-                continue
-            raise
+    if species_note:
+        instructions.append(f"Species-specific notes: {species_note}")
 
-    for cand in resp.get("candidates", []):
-        for part in cand.get("content", {}).get("parts", []):
-            inline = part.get("inlineData") or part.get("inline_data")
-            if inline and inline.get("data"):
-                return base64.b64decode(inline["data"])
-    # No image - surface the blocking reason so users know what to fix.
-    finish = (resp.get("candidates", [{}])[0]).get("finishReason", "?")
-    block = resp.get("promptFeedback", {}).get("blockReason", "")
-    raise RuntimeError(f"no image (finish={finish} block={block})")
+    if anti_ref:
+        anti_name = (
+            (ANTI_REFS.get(anti_ref_key or "") or {}).get("common_name")
+            or "lookalike species"
+        )
+        instructions.append(
+            f"The second reference image shows a NEGATIVE lookalike: {anti_name}. "
+            "Do NOT copy distinguishing features of that bird. "
+            + _anti_ref_line(anti_ref_key)
+        )
+
+    if style_ref:
+        instructions.append(
+            "The final reference image is a POSITIVE STYLE reference. "
+            "Ignore the species identity shown in the style reference. "
+            "Borrow only its painting technique: flat washes, confident outlines, "
+            "tonal mineral-pigment ground, and overall illustration character. "
+            "Do NOT copy branches, leaves, water, moon, scenery, or other background objects."
+        )
+
+    final_prompt = "\n\n".join(instructions)
+
+    image_paths = []
+    if positive_ref:
+        image_paths.append(positive_ref)
+    if anti_ref:
+        image_paths.append(anti_ref)
+    if style_ref:
+        image_paths.append(style_ref)
+
+    if not image_paths:
+        result = client.images.generate(
+            model="gpt-image-2.5-flare",
+            prompt=final_prompt,
+            size="1024x1024",
+            quality="medium",
+            output_format="png",
+        )
+    else:
+        files = [open(p, "rb") for p in image_paths]
+        try:
+            result = client.images.edit(
+                model="gpt-image-2.5-flare",
+                image=files,
+                prompt=final_prompt,
+                size="1024x1024",
+                quality="medium",
+                output_format="png",
+            )
+        finally:
+            for f in files:
+                f.close()
+
+    if not result.data:
+        raise RuntimeError("OpenAI returned no image data")
+
+    image_b64 = result.data[0].b64_json
+    if not image_b64:
+        raise RuntimeError("OpenAI returned an empty image")
+
+    return base64.b64decode(image_b64)
 
 
 def _mime_for(p: Path) -> str:
@@ -543,7 +503,7 @@ def main() -> int:
     src.add_argument("--stdin", action="store_true", help="Read Sci|Com lines from stdin")
     ap.add_argument("--ebird-region", help="eBird region code (e.g. US-CA, US-CA-085) to filter labels")
     ap.add_argument("--ebird-key", help="eBird API key (or EBIRD_API_KEY env)")
-    ap.add_argument("--gemini-key", help="Gemini API key (or GEMINI_API_KEY env)")
+    ap.add_argument("--openai-key", help="OpenAI API key (or OPENAI_API_KEY env)")
     ap.add_argument("--out", type=Path,
                     default=Path(__file__).resolve().parents[1] / "assets" / "illustrations",
                     help="Output directory (default: avian/assets/illustrations/)")
@@ -570,9 +530,9 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0, help="Cap species count for testing")
     args = ap.parse_args()
 
-    gemini_key = args.gemini_key or os.environ.get("GEMINI_API_KEY", "")
-    if not gemini_key:
-        print("error: GEMINI_API_KEY required (--gemini-key or env)", file=sys.stderr)
+    openai_key = args.openai_key or os.environ.get("OPENAI_API_KEY", "")
+    if not openai_key:
+        print("error: OPENAI_API_KEY required (--openai-key or env)", file=sys.stderr)
         return 2
 
     # Build species list
@@ -642,7 +602,7 @@ def main() -> int:
                 style_ref_path = args.styles / select_style_ref(sci, pose)
                 if not style_ref_path.exists():
                     style_ref_path = None
-                data = gen_one(gemini_key, prompt, sci, com, pose,
+                data = gen_one(openai_key, prompt, sci, com, pose,
                                positive_ref=pos_ref, anti_ref=anti,
                                anti_ref_key=anti_key_for_call,
                                species_note=notes.get(sci),

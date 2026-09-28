@@ -1,8 +1,9 @@
+
 (function () {
   var PLACEHOLDER = [{ "sci": "Calypte anna", "com": "Anna's Hummingbird", "featured": true }, { "sci": "Passer domesticus", "com": "House Sparrow" }, { "sci": "Haemorhous mexicanus", "com": "House Finch" }, { "sci": "Turdus migratorius", "com": "American Robin" }, { "sci": "Zenaida macroura", "com": "Mourning Dove" }, { "sci": "Spinus psaltria", "com": "Lesser Goldfinch" }, { "sci": "Zonotrichia leucophrys", "com": "White-crowned Sparrow" }, { "sci": "Aphelocoma californica", "com": "California Scrub-Jay" }, { "sci": "Mimus polyglottos", "com": "Northern Mockingbird" }, { "sci": "Sayornis nigricans", "com": "Black Phoebe" }, { "sci": "Larus occidentalis", "com": "Western Gull" }, { "sci": "Corvus brachyrhynchos", "com": "American Crow" }];
   // Library-wide revision for a full offline sketch rebuild. One-species
   // corrections use ART_REVISIONS below.
-  var SKETCH_VERSION = 'r12'; // r12: 84 eastern NA birds (PR #23) refined + re-cut. r11: full library restyle: every species
+  var SKETCH_VERSION = 'r14'; // r12: 84 eastern NA birds (PR #23) refined + re-cut. r11: full library restyle: every species
   // re-rendered (perched + flight) with clean cutouts.
   // Cache-bust for /avian/api/cutout.php. Bump only when every CF DC must
   // drop the full image library.
@@ -10,13 +11,36 @@
   // equivalent to a global cache purge for /avian/api/cutout.php.
   // caches.default.delete() in the worker only affects one colo at a time,
   // so a versioned URL is the only reliable way to invalidate everywhere.
-  var IMG_VERSION = 'r12'; // r12: 84 eastern NA birds (PR #23) refined + re-cut. r11: full library restyle: every species re-rendered
+  var IMG_VERSION = 'r14'; // r12: 84 eastern NA birds (PR #23) refined + re-cut. r11: full library restyle: every species re-rendered
   // with clean cutouts, so drop every cached copy.
   // Keep table and one-off art revisions separate from the library-wide
   // versions above. A corrected species should not evict every bird image.
-  var TABLE_VERSION = 'r13';
+  var TABLE_VERSION = 'r17';
   var ART_REVISIONS = {
-    'aphelocoma-woodhouseii': 'anatomy-1'
+    'aphelocoma-woodhouseii': 'anatomy-1',  'aquila-nipalensis': 'regen-20260926-1',
+  'ardea-cinerea': 'regen-20260926-1',
+  'ardeola-ralloides': 'regen-20260926-1',
+  'certhia-familiaris': 'regen-20260926-1',
+  'clangula-hyemalis': 'regen-20260926-1',
+  'dendrocopos-leucotos': 'regen-20260926-1',
+  'dendrocopos-major': 'regen-20260926-1',
+  'emberiza-rustica': 'regen-20260926-1',
+  'falco-rusticolus': 'regen-20260926-1',
+  'gallinago-media': 'regen-20260926-1',
+  'gavia-adamsii': 'regen-20260926-1',
+  'glaucidium-gnoma': 'regen-20260926-1',
+  'lanius-collurio': 'regen-20260926-1',
+  'lanius-minor': 'regen-20260926-1',
+  'larus-canus': 'regen-20260926-1',
+  'larus-fuscus': 'regen-20260926-1',
+  'larus-glaucoides': 'regen-20260926-1',
+  'larus-hyperboreus': 'regen-20260926-1',
+  'locustella-fluviatilis': 'regen-20260926-1',
+  'locustella-lanceolata': 'regen-20260926-1',
+  'locustella-luscinioides': 'regen-20260926-1',
+  'phylloscopus-bonelli': 'regen-20260926-1',
+  'troglodytes-troglodytes': 'regen-20260926-1',
+
   };
   function artRevision(sci, fallback) {
     return ART_REVISIONS[slugify(String(sci || ''))] || fallback;
@@ -81,9 +105,9 @@
 
   // Each view's title text. The shared static-head shows one of these
   // based on the current view; identical adjacent values mean the title
-  // stays put with no fade (collage and stats both say Heard Recently).
-  var VIEW_TITLES = ['Heard Recently', 'Heard Recently', 'Avian Atlas'];
-  var EMPTY_WINDOW_COPY = 'no detections heard in this window';
+  // stays put with no fade (collage and stats both say NESEN DZIRDĒTIE).
+  var VIEW_TITLES = ['NESEN DZIRDĒTIE', 'NESEN DZIRDĒTIE', 'PUTNU PASES'];
+  var EMPTY_WINDOW_COPY = 'šajā laikā putnu balsis neizdevās saklausīt.';
   var staticHead = document.querySelector('.static-head');
   var staticTitle = document.getElementById('staticTitle');
   function applySiteName(value) {
@@ -2543,7 +2567,7 @@
     tiles.forEach(function (t) {
       t.labelBox = null; t.labelRows = null; t.labelPx = 0; t.labelCells = null;
       if (!on) return;
-      var name = t.data.com || t.data.sci;
+      var name = t.data.lv || t.data.com || t.data.sci;
       if (!name) return;
       var out = outline(t.slug, t.mask);
       if (!out) return;
@@ -3222,20 +3246,20 @@
   // a bare "window" with the span it actually covers. Thresholds match
   // the winPick buttons (1H / 12H / 24H / 7D / ALL).
   function windowLabel(h, windowData) {
-    if (windowData && windowData.midnight_clamped) return 'since midnight';
-    if (h <= 1) return 'this hour';
-    if (h <= 12) return 'past 12h';
-    if (h <= 24) return 'past 24h';
-    if (h <= 168) return 'past 7d';
-    return 'all time';
+    if (windowData && windowData.midnight_clamped) return 'kopš pusnakts';
+    if (h <= 1) return 'pēdējā stundā';
+    if (h <= 12) return 'pēdējās 12h';
+    if (h <= 24) return 'pēdējās 24h';
+    if (h <= 168) return 'pēdējās 7d';
+    return 'kopumā';
   }
   function statsWindowLabel(h) {
     if (!hourlyDate) return windowLabel(h, DATA.statsRecent || DATA.recent);
-    if (h <= 1) return 'selected hour';
-    if (h <= 12) return 'final 12h';
+    if (h <= 1) return 'šajā stundā';
+    if (h <= 12) return 'pēdējās 12h';
     if (h <= 24) return 'selected day';
     if (h <= 168) return 'selected 7 days';
-    return 'through selected day';
+    return 'izvēlētajā dienā';
   }
 
   // ---- Live Pi data layer ----
@@ -3413,7 +3437,7 @@
       cols += ''
         + '<div class="stats-tl-col" data-sci="' + s.sci + '" style="left:' + centerPct.toFixed(3) + '%;width:' + colW.toFixed(2) + 'px">'
         + '<div class="stats-tl-square" style="bottom:' + bottomPct.toFixed(1) + '%;width:' + sq.toFixed(1) + 'px;height:' + sq.toFixed(1) + 'px"></div>'
-        + '<div class="stats-tl-label" style="bottom:calc(' + bottomPct.toFixed(1) + '% + ' + (sq + LABEL_GAP) + 'px)"><span class="com">' + (s.com || s.sci) + '</span><span class="sci">' + s.sci + '</span></div>'
+        + '<div class="stats-tl-label" style="bottom:calc(' + bottomPct.toFixed(1) + '% + ' + (sq + LABEL_GAP) + 'px)"><span class="com">' + (s.lv || s.com || s.sci) + '</span><span class="sci">' + s.sci + '</span></div>'
         + '</div>';
       var showStamp = (i % stride === 0) || (i === C - 1);
       var lab = showStamp ? fmtTs(parseTs(s.last_seen)) : '';
@@ -3421,8 +3445,10 @@
     });
 
     var note = trimmed
-      ? '<div class="stats-tl-cap">' + C + ' most-heard of ' + all.length + '</div>'
-      : '';
+    ? '<div class="stats-tl-cap">' + C + ' no ' + all.length +
+        ' visbiežāk dzirdētajām sugām</div>'
+    : '';
+
     tl.innerHTML =
       '<div class="stats-tl-yaxis">' + yaxis + '</div>'
       + '<div class="stats-tl-plot"' + (isMobile ? ' style="width:' + Math.round(plotW) + 'px"' : '') + '>'
@@ -3466,7 +3492,7 @@
     var recent = DATA.statsRecent || { species: [] };
     var firstseen = DATA.firstseen || { species: [] };
 
-    // By Period - pulled directly from ./avian/api/birdnet-api.php?action=stats so the numbers
+    // Periodā - pulled directly from ./avian/api/birdnet-api.php?action=stats so the numbers
     // are authoritative (BirdNET-Pi's own counts).
     var last_hour = (stats.last_hour && stats.last_hour.detections) || 0;
     var today_det = (stats.today && stats.today.detections) || 0;
@@ -3477,37 +3503,37 @@
     var firstSeenCap = document.getElementById('statsFirstSeenCap');
     var scopedLabel = educatorScopeId() ? educatorScopeLabel(effectiveEducatorScope) : '';
     if (byPeriodCap) byPeriodCap.textContent = scopedLabel
-      ? 'detections in ' + scopedLabel
+      ? 'novērojumi ' + scopedLabel
       : past
-      ? 'detections through ' + shortStatsDate(stats.date)
-      : 'detections, grouped by recency';
+      ? 'novērojumi ' + shortStatsDate(stats.date)
+      : 'novēroto putnu ierakstu skaits';
     if (firstSeenCap) firstSeenCap.textContent = scopedLabel
-      ? 'first detections in ' + scopedLabel
+      ? 'pirmie novērojumi ' + scopedLabel
       : past
-      ? 'life list as of ' + shortStatsDate(stats.date)
-      : 'newest additions to the life list';
+      ? 'putnu saime kopš ' + shortStatsDate(stats.date)
+      : 'jaunākie pagalma putnu saimē';
     document.getElementById('statsByPeriod').innerHTML = scopedLabel
-      ? liRow('CALLS', 'detections', fmtN(all_det))
-        + liRow('BIRDS', 'unique species', fmtN((((DATA.lifelist || {}).species) || []).length))
-      : liRow(past ? 'HOUR' : 'NOW', past ? 'final hour' : 'last hour', fmtN(last_hour))
-        + liRow(past ? 'DAY' : 'TODAY', past ? 'selected date' : 'today', fmtN(today_det))
-        + liRow('7D', past ? 'through this date' : 'last 7 days', fmtN(week_det))
-        + liRow('ALL', past ? 'through this date' : 'all time', fmtN(all_det));
+      ? liRow('SAUCIENI', 'novērojumi', fmtN(all_det))
+        + liRow('PUTNI', 'unikālas sugas', fmtN((((DATA.lifelist || {}).species) || []).length))
+      : liRow(past ? 'STUNDA' : 'TAGAD', past ? 'pēdējā stunda' : 'pēdējās stundas laikā', fmtN(last_hour))
+        + liRow(past ? 'DIENA' : 'ŠODIEN', past ? 'selected date' : 'šodien', fmtN(today_det))
+        + liRow('7D', past ? 'šajā datumā' : 'pēdējās 7 dienās', fmtN(week_det))
+        + liRow('KOPĀ', past ? 'šajā datumā' : 'visi', fmtN(all_det));
 
-    // Top Species - top 5 species in the current window. ./avian/api/birdnet-api.php?action=recent
+    // Top Sugas - top 5 species in the current window. ./avian/api/birdnet-api.php?action=recent
     // already returns species sorted by last_seen DESC; re-sort by count.
     var ranked = (recent.species || [])
       .slice()
       .sort(function (a, b) { return (+b.n) - (+a.n); })
       .slice(0, 5);
     document.getElementById('statsTopSpec').innerHTML = ranked.length
-      ? ranked.map(function (s, i) { return liRow(pad(i + 1), s.com, fmtN(+s.n), s.sci); }).join('')
+      ? ranked.map(function (s, i) { return liRow(pad(i + 1), s.lv || s.com || s.sci, fmtN(+s.n), s.sci); }).join('')
       : '<li class="stats-window-empty"><span class="window-empty">' + EMPTY_WINDOW_COPY + '</span></li>';
     document.getElementById('statsTopSpecCap').textContent = scopedLabel
-      ? 'most-heard, ' + scopedLabel
-      : 'most-heard, ' + statsWindowLabel(currentHours);
+      ? 'visbiežāk ' + scopedLabel
+      : 'visbiežāk ' + statsWindowLabel(currentHours);
 
-    // First Detections - newest additions to the life list, with a
+    // Pirmie Novērojumi - newest additions to the life list, with a
     // "Xd ago" label computed from first_seen.
     var fs = (firstseen.species || []).slice(0, 5);
     var anchor = stats.anchor ? Date.parse(stats.anchor.replace(' ', 'T')) : Date.now();
@@ -3518,11 +3544,11 @@
         var label = '-';
         if (!isNaN(t)) {
           var daysAgo = Math.floor((now - t) / 86400000);
-          label = daysAgo === 0 ? (past ? 'that day' : 'today') : daysAgo + (past ? 'd prior' : 'd ago');
+          label = daysAgo === 0 ? (past ? 'tajā dienā' : 'šodien') : (past ? 'pirms ' : 'pirms ') + daysAgo + ('d');
         }
-        return liRow(label, s.com, '', s.sci);
+        return liRow(label, s.lv || s.com || s.sci, '', s.sci);
       }).join('')
-      : liRow('-', 'no detections yet', '');
+      : liRow('-', 'bez novērojumiem', '');
   }
 
   // ---- Day's Rhythm + hourly ledger ----
@@ -3690,22 +3716,22 @@
     var cap = document.getElementById('statsRhythmCap');
     if (title && cap) {
       if (educatorScopeId()) {
-        title.textContent = 'Listening Rhythm';
-        cap.textContent = 'detections within ' + educatorScopeLabel(effectiveEducatorScope);
+        title.textContent = 'Klausīšanās Ritms';
+        cap.textContent = 'novērojumi ' + educatorScopeLabel(effectiveEducatorScope);
       } else if (r && r.mode === 'week') {
-        title.textContent = "Week's Rhythm";
-        cap.textContent = 'average day in this 7-day window, over the previous 7 days';
+        title.textContent = "Nedēļas Ritms";
+        cap.textContent = 'Vidējais dienas rādītājs šajā 7 dienu periodā, salīdzinot ar iepriekšējām 7 dienām';
       } else if (currentHours <= 1) {
-        title.textContent = "Hour's Rhythm";
-        cap.textContent = 'detections through the selected hour, over the prior week\'s average';
+        title.textContent = "Stundas Ritms";
+        cap.textContent = 'Novērojumi līdz izvēlētajai stundai, salīdzinot ar iepriekšējās nedēļas vidējo';
       } else if (!hourlyDate && DATA.stats && DATA.stats.is_today && currentHours < 1000000) {
-        title.textContent = "Today's Rhythm";
+        title.textContent = "Šodienas Ritms";
         cap.textContent = currentHours <= 12
-          ? 'detections through the current 12-hour window, over last week\'s average'
-          : 'detections through the day, over last week\'s average';
+          ? 'Novērojumi pašreizējā 12 stundu periodā, salīdzinot ar pagājušās nedēļas vidējo'
+          : 'Novērojumu skaits dienas gaitā, salīdzinot ar pagājušās nedēļas vidējo rādītāju';
       } else {
-        title.textContent = "Day's Rhythm";
-        cap.textContent = 'detections on the selected date, over the prior week\'s average';
+        title.textContent = "Dienas Ritms";
+        cap.textContent = 'Novērojumi izvēlētajā datumā, salīdzinot ar iepriekšējās nedēļas vidējo';
       }
     }
     if (!r || (!(r.today || []).length && !(r.avg || []).length)) {
@@ -3834,8 +3860,8 @@
     }
     var date = statsDateOnScreen();
     var today = stationToday();
-    label.textContent = date === today && !hourlyDate ? 'today' : shortStatsDate(date);
-    label.setAttribute('aria-label', 'Choose stats date, ' + (date === today ? 'today' : shortStatsDate(date)));
+    label.textContent = date === today && !hourlyDate ? 'šodien' : shortStatsDate(date);
+    label.setAttribute('aria-label', 'Izvēlies datumu, ' + (date === today ? 'šodien' : shortStatsDate(date)));
     next.disabled = !hourlyDate || date >= today;
   }
   function isoLocalDate(d) {
@@ -3967,7 +3993,7 @@
       (s.hours || []).forEach(function (x) { hours[x.hour] = x.n; });
       var shown = 0;
       for (h = rng.from; h <= rng.to; h++) { shown += hours[h]; if (hours[h] > maxN) maxN = hours[h]; }
-      return { sci: s.sci, com: s.com, total: shown, hours: hours };
+      return { sci: s.sci, com: s.com, lv: s.lv, total: shown, hours: hours };
     }).filter(function (s) { return s.total > 0; })
       .sort(function (a, b) { return b.total - a.total; });
     if (!rowsArr.length) {
@@ -3981,10 +4007,10 @@
       var majorHour = hourCount <= 12 || hh % 3 === 0 || hh === rng.to;
       html += '<th class="heatmap-hour' + (majorHour ? ' heatmap-hour-major' : '') + '">' + pad(hh) + '</th>';
     }
-    html += '<th class="heatmap-total">total</th></tr></thead><tbody>';
+    html += '<th class="heatmap-total">kopā</th></tr></thead><tbody>';
     rowsArr.forEach(function (s) {
       html += '<tr class="heatmap-row" data-sci="' + escHtml(s.sci) + '">'
-        + '<td class="heatmap-name"><span class="com">' + escHtml(s.com) + '</span>'
+        + '<td class="heatmap-name"><span class="com">' + escHtml(s.lv || s.com || s.sci) + '</span>'
         + '<span class="sci">' + escHtml(s.sci) + '</span></td>';
       for (var h = rng.from; h <= rng.to; h++) {
         var c = s.hours[h];
@@ -4012,7 +4038,7 @@
       // bottom edge travels. The nested flex chain resists height:auto, so set
       // the height that fits outright, from the row count.
       note.hidden = false;
-      note.textContent = 'Show less';
+      note.textContent = 'Parādīt mazāk';
       wrap.removeAttribute('data-more');
       if (chart) {
         chart.classList.add('rh-grow');
@@ -4055,7 +4081,7 @@
       body.deleteRow(body.rows.length - 1);
     }
     note.hidden = false;
-    note.textContent = 'Show more';
+    note.textContent = 'Parādīt vairāk';
     // Fade the last visible row into paper so the cut edge reads as "more
     // below" rather than a hard stop; the styles.css mask keys off this.
     wrap.setAttribute('data-more', '1');
@@ -5143,24 +5169,24 @@
   function setAtlasCardButtonState(btn, state) {
     if (!btn) return;
     btn.setAttribute('data-state', state);
-    if (state === 'playing') {
+    if (state === 'atskaņo') {
       btn.setAttribute('data-active', 'true');
       btn.innerHTML = ICON_PAUSE + '<span>stop</span>';
-    } else if (state === 'loading') {
+    } else if (state === 'lādē') {
       btn.setAttribute('data-active', 'true');
       btn.innerHTML = ICON_PLAY + '<span>...</span>';
-    } else if (state === 'missing') {
+    } else if (state === 'trūkst') {
       btn.setAttribute('data-active', 'false');
-      btn.innerHTML = ICON_PLAY + '<span>no audio</span>';
+      btn.innerHTML = ICON_PLAY + '<span>audio nav pieejams</span>';
       setTimeout(function () {
-        if (btn.getAttribute('data-state') === 'missing') {
-          btn.innerHTML = ICON_PLAY + '<span>play</span>';
+        if (btn.getAttribute('data-state') === 'trūkst') {
+          btn.innerHTML = ICON_PLAY + '<span>atskaņot</span>';
           btn.setAttribute('data-state', 'idle');
         }
       }, 2200);
     } else {
       btn.setAttribute('data-active', 'false');
-      btn.innerHTML = ICON_PLAY + '<span>play</span>';
+      btn.innerHTML = ICON_PLAY + '<span>atskaņot</span>';
     }
   }
   function clearAtlasCardProgress(card) {
@@ -5395,18 +5421,18 @@
       // The "all time" window makes the windowed count identical to the
       // all-time count - collapse to a single stat rather than print the
       // same number twice. Otherwise label the count with its span.
-      var allLabel = educatorScopeId() ? educatorScopeLabel(effectiveEducatorScope) : 'all time';
+      var allLabel = educatorScopeId() ? educatorScopeLabel(effectiveEducatorScope) : 'kopā';
       var statRows = isAllWindow
         ? '<div><span class="n">' + fmtNK(total) + '</span><span class="lbl-inline">' + escHtml(allLabel) + '</span></div>'
         : '<div><span class="n">' + fmtNK(win) + '</span><span class="lbl-inline">' + windowLabel(atlasHours, DATA.recent) + '</span></div>'
-        + '<div><span class="n">' + fmtNK(total) + '</span><span class="lbl-inline">all time</span></div>';
+        + '<div><span class="n">' + fmtNK(total) + '</span><span class="lbl-inline">kopā</span></div>';
       // Heard but never drawn: issue the bird's real family stamp with the
       // egg nest occupying its artwork plate. Waiting on tablesReady keeps
       // a card from flashing the placeholder before dims.json lands.
       var needsArt = tablesReady && !DIMS[slugify(s.sci)];
       var fresh = justGenerated[s.sci] ? '&t=' + justGenerated[s.sci] : '';
       if (classic) {
-        var common = s.com || s.sci;
+        var common = s.lv || s.com || s.sci;
         var imageSrc = needsArt ? './nest-eggs.webp' : sketchSrc + fresh;
         var birdWiki = wikiUrl(s.sci);
         var birdEbird = ebirdUrl(s.sci);
@@ -5428,8 +5454,8 @@
           + '<div class="sci">' + escHtml(s.sci) + '</div>'
           + '<div class="spectro-wrap" aria-hidden="true"></div>'
           + '<div class="actions">'
-          + '<button type="button" class="chip play" data-action="play" aria-label="play recording">'
-          + ICON_PLAY + '<span>play</span>'
+          + '<button type="button" class="chip play" data-action="play" aria-label="atskaņot ierakstu">'
+          + ICON_PLAY + '<span>atskaņot</span>'
           + '</button>'
           + '<a class="chip ext" href="' + escHtml(birdWiki) + '" target="_blank" rel="noopener" aria-label="Wikipedia">wiki</a>'
           + (birdEbird ? '<a class="chip ext" href="' + escHtml(birdEbird) + '" target="_blank" rel="noopener" aria-label="eBird">ebird</a>' : '')
@@ -5473,9 +5499,38 @@
       var out = '', run = [], cur = null;
       function flush() {
         if (!run.length) return;
+        var familyNameLv = {
+    'Blackbirds & Orioles': 'Ikterīdi un vālodzes',
+    'Chickadees & Titmice': 'Zīlītes',
+    'Crows & Jays': 'Vārnas un sīļi',
+    'Doves & Pigeons': 'Dūjas un baloži',
+    'Finches': 'Žubītes',
+    'Flycatchers': 'Mušķērāji',
+    'Gulls': 'Kaijas',
+    'Hawks': 'Vanagi',
+    'Herons': 'Gārņi',
+    'Hummingbirds': 'Kolibri',
+    'Kingfishers': 'Zivju dzenīši',
+    'Mockingbirds & Thrashers': 'Zobgaļputni',
+    'Other': 'Citi',
+    'Owls': 'Pūces',
+    'Shorebirds': 'Bridējputni',
+    'Sparrows': 'Zvirbuļi',
+    'Swallows': 'Bezdelīgas',
+    'Thrushes': 'Strazdi',
+    'Treecreepers': 'Mizložņas',
+    'Warblers & Vireos': 'Ķauķi un vireoni',
+    'Waterfowl': 'Ūdensputni',
+    'Waxwings': 'Zīdastes'
+};
+
+var visibleFamily = familyNameLv[cur] || cur;
+var speciesCountLv =
+    run.length + (run.length === 1 ? ' suga' : ' sugas');
+
         out += '<section class="fam-block">'
-             + '<h2 class="atlas-fam"><span>' + escHtml(cur) + '</span><i></i>'
-             + '<em>' + run.length + ' species</em></h2>'
+             + '<h2 class="atlas-fam"><span>' + escHtml(visibleFamily) + '</span><i></i>'
+             + '<em>' + speciesCountLv + '</em></h2>'
              + '<div class="atlas-fam-grid">' + run.join('') + '</div></section>';
         run = [];
       }
@@ -8446,17 +8501,34 @@
   var modalAudio = null;
   var modalRecBtn = null;
   var modalAudioToken = 0;
-  function fmtRecTime(d, t) {
+  function fmtElapsedCompact(d, t) {
+    if (!d) return '';
+
+    var date = new Date((d || '') + 'T' + (t || '00:00:00'));
+    if (isNaN(date.getTime())) return '';
+
+    var elapsed = Math.max(
+        0,
+        Math.floor((Date.now() - date.getTime()) / 1000)
+    );
+
+    if (elapsed < 60) return elapsed + 's';
+    if (elapsed < 3600) return Math.floor(elapsed / 60) + 'm';
+    if (elapsed < 86400) return Math.floor(elapsed / 3600) + 'h';
+
+    return Math.floor(elapsed / 86400) + 'd';
+}
+function fmtRecTime(d, t) {
     // d="2026-05-15", t="20:25:29"
     if (!d) return '-';
     var date = new Date((d || '') + 'T' + (t || '00:00:00'));
     if (isNaN(date.getTime())) return d + ' ' + (t || '');
     var now = Date.now();
     var ago = Math.floor((now - date.getTime()) / 1000);
-    if (ago < 60) return ago + 's ago';
-    if (ago < 3600) return Math.floor(ago / 60) + 'm ago';
-    if (ago < 86400) return Math.floor(ago / 3600) + 'h ago';
-    return Math.floor(ago / 86400) + 'd ago';
+    if (ago < 60) return 'pirms' + ago + 's';
+    if (ago < 3600) return Math.floor(ago / 60) + 'm';
+    if (ago < 86400) return Math.floor(ago / 3600) + 'h';
+    return Math.floor(ago / 86400) + 'd';
   }
   function fmtDateLine(d, t) {
     if (!d) return '';
@@ -8474,10 +8546,10 @@
       if (!isNaN(t)) days = Math.max(1, Math.ceil((Date.now() - t) / 86400000));
     }
     var perDay = total / days;
-    if (perDay >= 5) return 'common';
-    if (perDay >= 1) return 'regular';
-    if (perDay >= 0.2) return 'occasional';
-    return 'rare';
+    if (perDay >= 5) return 'biež sastopama';
+    if (perDay >= 1) return 'regulāra';
+    if (perDay >= 0.2) return 'neregulāra';
+    return 'reta';
   }
   function clamp01(value) {
     return Math.max(0, Math.min(1, +value || 0));
@@ -9188,16 +9260,17 @@
     // The common name is already present on every Atlas card/lifelist row.
     // Paint it synchronously so a long title never arrives a frame late and
     // reflows the identity panel while the stamp is landing.
-    document.getElementById('modalCommon').textContent = (lifelistBird && lifelistBird.com) || sci;
+    document.getElementById('modalCommon').textContent =
+    (lifelistBird && (lifelistBird.lv || lifelistBird.com)) || sci;
     document.getElementById('modalAllTime').textContent = '-';
     document.getElementById('modalFirstSeen').textContent = '-';
     document.getElementById('modalRarity').textContent = '-';
     document.getElementById('modalRarity').classList.remove('rare');
-    document.getElementById('modalDesc').textContent = 'Loading description...';
+    document.getElementById('modalDesc').textContent = 'Notiek apraksta ielāde...';
     document.getElementById('modalDesc').classList.add('placeholder');
     var previousDistinctive = document.querySelector('.postcard-about .about-distinctive');
     if (previousDistinctive) previousDistinctive.remove();
-    document.getElementById('modalRecordings').innerHTML = '<li class="rec-empty">Loading recordings...</li>';
+    document.getElementById('modalRecordings').innerHTML = '<li class="rec-empty">Notiek ierakstu ielāde...</li>';
     document.getElementById('modalRecCount').textContent = '';
     document.getElementById('modalWiki').href = wikiUrl(sci);
     var ebirdLink = document.getElementById('modalEbird');
@@ -9234,15 +9307,34 @@
     loadSpecies.then(function (j) {
       if (contentRequest !== POSTCARD_CONTENT_REQUEST) return;
       var s = j.summary || {};
-      document.getElementById('modalCommon').textContent = s.com || sci;
-      document.getElementById('modalAllTime').textContent = (+s.total || 0).toLocaleString();
-      document.getElementById('modalFirstSeen').textContent = s.first_seen ? fmtRecTime(s.first_seen.split(' ')[0], s.first_seen.split(' ')[1]) : '-';
+      document.getElementById('modalCommon').textContent =
+    s.lv || (lifelistBird && lifelistBird.lv) || s.com ||
+    (lifelistBird && lifelistBird.com) || sci;
+      var heardTotal = +s.total || 0;
+
+	var heardText = heardTotal === 1
+    	? 'Dzirdēts 1 reizi'
+    	: 'Dzirdēts ' + heardTotal.toLocaleString() + ' reizes';
+
+	var firstSeenCompact = s.first_seen
+    	? fmtElapsedCompact(
+        	s.first_seen.split(' ')[0],
+        	s.first_seen.split(' ')[1]
+    	)
+    	: '';
+
+	document.getElementById('modalAllTime').textContent =
+    	heardText + (firstSeenCompact ? '; pirmoreiz pirms ' + firstSeenCompact : '');
+
+	document.getElementById('modalFirstSeen').textContent = '';
+
+
       var rar = rarityLabel(+s.total || 0, s.first_seen);
       var rarEl = document.getElementById('modalRarity');
       rarEl.textContent = rar;
       if (rar === 'rare') rarEl.classList.add('rare');
       var dets = j.detections || [];
-      document.getElementById('modalRecCount').textContent = dets.length + (dets.length === 1 ? ' recording' : ' recordings');
+      document.getElementById('modalRecCount').textContent = dets.length + (dets.length === 1 ? ' ieraksts' : ' ieraksti');
       document.getElementById('modalRecordings').innerHTML = dets.length
         ? dets.map(function (d) {
           return '<li class="rec-row" data-file="' + escHtml(d.file || '') + '" data-date="' + escHtml(d.d || '')
@@ -9254,7 +9346,7 @@
             + '<span class="date-time"><b>' + fmtDateLine(d.d, d.t) + '</b></span>'
             + '</button>'
             + '<div class="rec-spectro" aria-hidden="true">'
-            + '<div class="rec-spectro-loading">loading spectrogram...</div>'
+            + '<div class="rec-spectro-loading">Notiek spektrogrammas ielāde...</div>'
             + '<div class="rec-spectro-played"></div>'
             + '<div class="rec-loop-region" aria-hidden="true"></div>'
             + '<div class="rec-spectro-cursor"></div>'
@@ -9287,7 +9379,7 @@
       if (contentRequest !== POSTCARD_CONTENT_REQUEST) return;
       var desc = document.getElementById('modalDesc');
       renderAboutDescription(desc, j);
-      if (j.source && /^https:\/\/en\.wikipedia\.org\/wiki\//.test(j.source.url || '')) {
+      if (j.source && /^https:\/\/(?:lv|en)\.wikipedia\.org\/wiki\//.test(j.source.url || '')) {
         document.getElementById('modalWiki').href = j.source.url;
       }
     }).catch(function () {

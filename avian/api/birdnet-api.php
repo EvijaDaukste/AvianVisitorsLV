@@ -35,6 +35,37 @@ require_once __DIR__ . '/admin-auth.php';
 // be relied on.
 $DB_PATH = educator_birds_db_path();
 $CONF_PATH = dirname(__DIR__, 2) . '/birdnet.conf';
+$LV_LABEL_PATH = dirname(__DIR__, 2) . '/model/LV birds_openai.txt';
+function loadLatvianBirdNames(string $path): array {
+    $map = [];
+
+    if (!is_readable($path) || is_dir($path)) {
+        return $map;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        return $map;
+    }
+
+    foreach ($lines as $line) {
+        $parts = explode('|', $line, 2);
+        if (count($parts) !== 2) {
+            continue;
+        }
+
+        $sci = trim($parts[0]);
+        $lv = trim($parts[1]);
+
+        if ($sci !== '' && $lv !== '') {
+            $map[$sci] = $lv;
+        }
+    }
+
+    return $map;
+}
+
+$LV_BIRD_NAMES = loadLatvianBirdNames($LV_LABEL_PATH);
 
 // SITE_NAME is already public on BirdNET-Pi's legacy homepage. Read only that
 // key so the collage can share its canonical title without exposing the rest
@@ -58,9 +89,9 @@ function publicSiteName(string $path): string {
             $raw = preg_replace('/\s+#.*$/', '', $raw) ?? '';
             $raw = trim($raw);
         }
-        if (strlen($raw) <= 60 && preg_match("/^[A-Za-z0-9 _.,'-]*$/u", $raw) === 1) {
-            $value = $raw;
-        }
+        if (strlen($raw) <= 60 && preg_match("/^[\p{L}\p{M}0-9 _.,'-]*$/u", $raw) === 1) {
+    $value = $raw;
+}
     }
     return $value !== '' ? $value : 'BirdNET-Pi';
 }
@@ -345,6 +376,11 @@ switch ($action) {
         . "       MAX(Date||' '||Time) AS last_seen, COUNT(*) AS n, MAX(Confidence) AS best_conf "
         . "FROM detections GROUP BY Sci_Name ORDER BY first_seen ASC"
         );
+foreach ($rs as &$r) {
+    $r['lv'] = $LV_BIRD_NAMES[$r['sci']] ?? $r['com'] ?? $r['sci'];
+}
+unset($r);
+
         birdnetRespond($db, $educatorScope, ['species' => $rs, 'as_of' => date('c')]);
         break;
     }
@@ -388,6 +424,11 @@ switch ($action) {
             $r['detection_id'] = isset($best['detection_id']) ? (int)$best['detection_id'] : null;
             $r['top_at']   = isset($best['d']) ? ($best['d'].' '.$best['t']) : null;
         }
+foreach ($rs as &$r) {
+    $r['lv'] = $LV_BIRD_NAMES[$r['sci']] ?? $r['com'] ?? $r['sci'];
+}
+unset($r);
+
         birdnetRespond($db, $educatorScope, [
             'hours' => $hours, 'date' => $ctx['date'], 'station_date' => $ctx['today'],
             'is_today' => $ctx['is_today'], 'anchor' => $ctx['anchor'],
@@ -471,7 +512,12 @@ switch ($action) {
         . "GROUP BY Sci_Name ORDER BY first_seen DESC LIMIT :lim",
           [':anchor' => $ctx['anchor'], ':lim' => $limit]
         );
-        birdnetRespond($db, $educatorScope, [
+        
+	foreach ($rs as &$r) {
+    $r['lv'] = $LV_BIRD_NAMES[$r['sci']] ?? $r['com'] ?? $r['sci'];
+}
+unset($r);
+	birdnetRespond($db, $educatorScope, [
             'date' => $ctx['date'], 'station_date' => $ctx['today'],
             'is_today' => $ctx['is_today'], 'species' => $rs, 'as_of' => date('c')
         ]);
@@ -598,7 +644,7 @@ switch ($action) {
         foreach ($rs as $r) {
             $sci = $r['sci'];
             if (!isset($species[$sci])) {
-                $species[$sci] = ['sci' => $sci, 'com' => $r['com'], 'total' => 0, 'hours' => []];
+                $species[$sci] = ['sci' => $sci, 'com' => $r['com'], 'lv' => $LV_BIRD_NAMES[$sci] ?? $r['com'] ?? $sci, 'total' => 0, 'hours' => []];
             }
             $species[$sci]['hours'][] = ['hour' => (int)$r['hour'], 'n' => (int)$r['n']];
             $species[$sci]['total'] += (int)$r['n'];

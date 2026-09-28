@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="no-referrer">
-<title>your birds</title>
+<title>tavi putni</title>
 <meta name="description" content="A live bird collage from your window.">
 <link rel="icon" type="image/png" href="./favicon.png?v=3">
 <link rel="apple-touch-icon" href="./favicon.png?v=3">
@@ -45,7 +45,7 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
     <button data-h="12"  type="button">12H</button>
     <button data-h="24"  type="button" aria-current="true">24H</button>
     <button data-h="168" type="button">7D</button>
-    <button data-h="1000000" type="button">ALL</button>
+    <button data-h="1000000" type="button">VISI</button>
   </div>
 </header>
 
@@ -88,8 +88,8 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
 
 <main class="stage">
   <header class="static-head">
-    <button type="button" class="pre" id="aboutLink" data-site-name>your birds</button>
-    <h1 id="staticTitle">Heard Recently</h1>
+    <button type="button" class="pre" id="aboutLink" data-site-name>tavi putni</button>
+    <h1 id="staticTitle">NESEN DZIRDĒTIE</h1>
   </header>
   <div class="views" id="views">
 
@@ -105,7 +105,7 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
           <button type="button" id="statsDatePrev" aria-label="Previous day">
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg>
           </button>
-          <button type="button" class="stats-date-label" id="statsDateLabel" aria-label="Choose stats date" aria-expanded="false" aria-controls="statsCalendar">today</button>
+          <button type="button" class="stats-date-label" id="statsDateLabel" aria-label="Choose stats date" aria-expanded="false" aria-controls="statsCalendar">šodien</button>
           <button type="button" id="statsDateNext" aria-label="Next day" disabled>
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg>
           </button>
@@ -119,11 +119,11 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
                 <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg>
               </button>
             </div>
-            <div class="stats-calendar-week" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+            <div class="stats-calendar-week" aria-hidden="true"><span>Sv</span><span>P</span><span>O</span><span>T</span><span>C</span><span>Pk</span><span>S</span></div>
             <div class="stats-calendar-days" id="statsCalendarDays" role="grid"></div>
             <div class="stats-calendar-foot">
-              <button type="button" id="statsLatestDate">latest heard</button>
-              <button type="button" id="statsTodayDate">today</button>
+              <button type="button" id="statsLatestDate">nesen dzirdēti</button>
+              <button type="button" id="statsTodayDate">šodien</button>
             </div>
           </div>
         </div>
@@ -138,13 +138,13 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
               <svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
                 <path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z"/>
               </svg>
-              <span class="tip">timeline</span>
+              <span class="tip">laika līnija</span>
             </button>
             <button data-chart="hourly" type="button" aria-label="by hour">
               <svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
                 <path d="M760-200v-120H200v120h560Zm0-200v-160H200v160h560Zm0-240v-120H200v120h560ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>
               </svg>
-              <span class="tip">by hour</span>
+              <span class="tip">pa stundām</span>
             </button>
           </div>
           <div class="stats-timeline" id="statsTimeline">
@@ -162,24 +162,24 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
         </div>
         <aside class="stats-side">
           <div class="grp">
-            <h3>By Period</h3>
-            <small id="statsByPeriodCap">detections, grouped by recency</small>
+            <h3>Periodā</h3>
+            <small id="statsByPeriodCap">novēroto putnu ierakstu skaits</small>
             <ol id="statsByPeriod"></ol>
           </div>
           <div class="grp">
-            <h3>Top Species</h3>
-            <small id="statsTopSpecCap">most-heard, current window</small>
+            <h3>Top Sugas</h3>
+            <small id="statsTopSpecCap">visbiežāk dzirdētie</small>
             <ol id="statsTopSpec"></ol>
           </div>
           <div class="grp">
-            <h3>First Detections</h3>
-            <small id="statsFirstSeenCap">newest additions to the life list</small>
+            <h3>Pirmie Novērojumi</h3>
+            <small id="statsFirstSeenCap">jaunākie pagalma putnu saimē</small>
             <ol id="statsFirstSeen"></ol>
           </div>
         </aside>
         <div class="grp stats-rhythm">
-          <h3 id="statsRhythmTitle">Today's Rhythm</h3>
-          <small id="statsRhythmCap">detections through the day, over last week's average</small>
+          <h3 id="statsRhythmTitle">Šodienas Ritms</h3>
+          <small id="statsRhythmCap">Novērojumi dienas gaitā, salīdzinot ar pagājušās nedēļas vidējo</small>
           <!-- SVG line chart, rendered by renderRhythm(). -->
           <div class="rh-plot" id="statsRhythm"></div>
         </div>
@@ -195,14 +195,14 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="7" cy="7" r="5.2"/><path d="M7 4 V7 L9.2 8.3"/>
             </svg>
-            <span class="tip">life list</span>
+            <span class="tip">pagalma saime</span>
           </button>
           <button data-sort="family" type="button" aria-label="by family">
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="4.2" height="4.2" rx="0.8"/><rect x="7.8" y="2" width="4.2" height="4.2" rx="0.8"/>
               <rect x="2" y="7.8" width="4.2" height="4.2" rx="0.8"/><rect x="7.8" y="7.8" width="4.2" height="4.2" rx="0.8"/>
             </svg>
-            <span class="tip">by family</span>
+            <span class="tip">pēc dzimtām</span>
           </button>
           <button data-sort="alpha" type="button" aria-label="alphabetical">
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
@@ -215,7 +215,7 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M2 12 V8"/><path d="M6 12 V5"/><path d="M10 12 V3"/>
             </svg>
-            <span class="tip">most heard</span>
+            <span class="tip">visdzirdētākie</span>
           </button>
         </div>
       </div>
@@ -223,7 +223,7 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
     </section>
 
   </div>
-  <div class="educator-data-loading-state" id="educatorDataLoading" role="status" aria-live="polite" hidden>loading birds...</div>
+  <div class="educator-data-loading-state" id="educatorDataLoading" role="status" aria-live="polite" hidden>ielādē putnus...</div>
 </main>
 
 <div id="postcard-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalCommon">
@@ -245,16 +245,16 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
             <svg viewBox="0 0 640 512" fill="currentColor" aria-hidden="true">
               <path d="M456 0c-48.6 0-88 39.4-88 88l0 29.2L12.5 390.6c-14 10.8-16.6 30.9-5.9 44.9s30.9 16.6 44.9 5.9L126.1 384l133.1 0 46.6 113.1c5 12.3 19.1 18.1 31.3 13.1s18.1-19.1 13.1-31.3L311.1 384l40.9 0c1.1 0 2.1 0 3.2 0l46.6 113.2c5 12.3 19.1 18.1 31.3 13.1s18.1-19.1 13.1-31.3l-42-102C484.9 354.1 544 280 544 192l0-64 0-8 80.5-20.1c8.6-2.1 13.8-10.8 11.6-19.4C629 52 603.4 32 574 32l-50.1 0C507.7 12.5 483.3 0 456 0zm0 64a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
             </svg>
-            <span class="tip">perched</span>
+            <span class="tip">nosēdies</span>
           </button>
           <button type="button" data-pose="2" aria-label="in flight">
             <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
               <path d="M160.8 96.5c14 17 31 30.9 49.5 42.2c25.9 15.8 53.7 25.9 77.7 31.6l0-31.5C265.8 108.5 250 71.5 248.6 28c-.4-11.3-7.5-21.5-18.4-24.4c-7.6-2-15.8-.2-21 5.8c-13.3 15.4-32.7 44.6-48.4 87.2zM320 144l0 30.6s0 0 0 0l0 1.3s0 0 0 0l0 32.1c-60.8-5.1-185-43.8-219.3-157.2C97.4 40 87.9 32 76.6 32c-7.9 0-15.3 3.9-18.8 11C46.8 65.9 32 112.1 32 176c0 116.9 80.1 180.5 118.4 202.8L11.8 416.6C6.7 418 2.6 421.8 .9 426.8s-.8 10.6 2.3 14.8C21.7 466.2 77.3 512 160 512c3.6 0 7.2-1.2 10-3.5L245.6 448l74.4 0c88.4 0 160-71.6 160-160l0-160 29.9-44.9c1.3-2 2.1-4.4 2.1-6.8c0-6.8-5.5-12.3-12.3-12.3L400 64c-44.2 0-80 35.8-80 80zm80-16a16 16 0 1 1 0 32 16 16 0 1 1 0-32z"/>
             </svg>
-            <span class="tip">in flight</span>
+            <span class="tip">lidojumā</span>
           </button>
         </div>
-        <button id="modalGenerate" class="postcard-generate" type="button" aria-live="polite" aria-atomic="true" hidden>generate image</button>
+        <button id="modalGenerate" class="postcard-generate" type="button" aria-live="polite" aria-atomic="true" hidden>izveidot attēlu</button>
         <nav class="postcard-links" aria-label="External bird references">
           <a id="modalWiki" target="_blank" rel="noopener">Wikipedia <span aria-hidden="true">↗</span></a>
           <a id="modalEbird" target="_blank" rel="noopener">eBird <span aria-hidden="true">↗</span></a>
@@ -268,8 +268,8 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
           <h2 id="modalCommon">-</h2>
           <span id="modalSci" hidden></span>
           <div class="postcard-stats" aria-label="Bird history">
-            <span><b id="modalAllTime">-</b> heard</span>
-            <span><b id="modalFirstSeen">-</b> first heard</span>
+            <span><b id="modalAllTime">-</b></span>
+	    <span hidden><b id="modalFirstSeen"></b></span>
           </div>
         </div>
         <div class="postcard-stamp-slot" aria-label="selected stamp"></div>
@@ -277,30 +277,30 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
 
       <details class="postcard-section postcard-about" name="postcard-info" open>
         <summary>
-          <span>About</span>
+          <span>Apraksts</span>
         </summary>
         <div class="postcard-section-body">
-          <div class="desc placeholder" id="modalDesc">Loading description...</div>
+          <div class="desc placeholder" id="modalDesc">Notiek apraksta ielāde... </div>
           <div class="modal-meta">
-            <span class="meta-item"><span class="k">Family</span><span class="v" id="modalFamily">-</span></span>
-            <span class="meta-item"><span class="k">Genus</span><span class="v" id="modalGenus">-</span></span>
-            <span class="meta-item"><span class="k">Species</span><span class="v" id="modalSpecies">-</span></span>
-            <span class="meta-item"><span class="k">Rarity</span><span class="v" id="modalRarity">-</span></span>
+            <span class="meta-item"><span class="k">Dzimta</span><span class="v" id="modalFamily">-</span></span>
+            <span class="meta-item"><span class="k">Ģints</span><span class="v" id="modalGenus">-</span></span>
+            <span class="meta-item"><span class="k">Suga</span><span class="v" id="modalSpecies">-</span></span>
+            <span class="meta-item"><span class="k">Sastopamība</span><span class="v" id="modalRarity">-</span></span>
           </div>
         </div>
       </details>
 
       <details class="postcard-section postcard-recordings" name="postcard-info">
         <summary>
-          <span>Recordings</span>
+          <span>Ieraksti</span>
           <small id="modalRecCount"></small>
         </summary>
         <div class="postcard-section-body">
           <div class="rec-table-head" aria-hidden="true">
-            <span>Last heard</span><span>Confidence</span><span>Date &amp; time</span>
+            <span>Pēdējoreiz dzirdēts</span><span>Pārliecība</span><span>Datums un laiks</span>
           </div>
           <ol id="modalRecordings">
-            <li class="rec-empty">Loading recordings...</li>
+            <li class="rec-empty">Notiek ierakstu ielāde... </li>
           </ol>
         </div>
       </details>
@@ -313,18 +313,18 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
   <div class="modal-backdrop" data-close="1"></div>
   <div class="about-card" role="document">
     <button type="button" class="modal-close" data-close="1" aria-label="close">×</button>
-    <p class="about-eyebrow" data-site-name>your birds</p>
-    <h2 id="aboutTitle">The birds outside your window</h2>
-    <p class="about-body">A tiny microphone identifies every passing bird with Cornell's <a href="https://birdnet.cornell.edu/" target="_blank" rel="noopener">BirdNET</a>. Each species shows up as an illustration in the collage, sized by how often it's been heard.</p>
-    <button type="button" class="about-explore" data-close="1">explore the birds →</button>
+    <p class="about-eyebrow" data-site-name>tavi putni</p>
+    <h2 id="aboutTitle">Putni tavā pagalmā</h2>
+    <p class="about-body">Neliels mikrofons atpazīst ikvienu garām lidojošu putnu ar Cornell <a href="https://birdnet.cornell.edu/" target="_blank" rel="noopener">BirdNET palīdzību</a>. Katra putnu suga kolāžā redzama kā ilustrācija, un tās izmērs atspoguļo, cik bieži putns ir dzirdēts.</p>
+    <button type="button" class="about-explore" data-close="1">iepazīsti putnus →</button>
     </div>
 </div>
 
 <nav class="slider" id="slider" aria-label="View">
   <i class="seg-pill" aria-hidden="true"></i>
-  <button type="button" data-i="0" aria-current="true">collage</button>
+  <button type="button" data-i="0" aria-current="true">kolāža</button>
   <button type="button" data-i="1">stats</button>
-  <button type="button" data-i="2">atlas</button>
+  <button type="button" data-i="2">pases</button>
 </nav>
 
 
@@ -391,7 +391,8 @@ var p=preference();d.setAttribute('data-theme',p==='light'||p==='dark'?p:systemT
   <filter id="waxBirdClean" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncA type="linear" slope="1.6" intercept="-.28"/></feComponentTransfer></filter>
   <filter id="waxKeyline" x="-30%" y="-22%" width="160%" height="144%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceAlpha" result="cleanAlpha"><feFuncA type="linear" slope="2.1" intercept="-.55"/></feComponentTransfer><feMorphology in="cleanAlpha" operator="dilate" radius="1.55" result="expanded"/><feFlood flood-color="#eee9de" result="cream"/><feComposite in="cream" in2="expanded" operator="in"/></filter>
 </defs></svg>
-  <script src="./stamps.js?v=r344"></script>
+  <script src="./lv-bird-taxonomy.js?v=1"></script>
+  <script src="./stamps.js?v=r345"></script>
   <script src="./stamp-batch-root.js?v=r250"></script>
 <script src="./stamp-batch-a.js?v=r341"></script>
   <script src="./stamp-batch-b.js?v=r318"></script>

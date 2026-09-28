@@ -1,78 +1,64 @@
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# ============================================================
+# Local backups and temporary files
+# ============================================================
 
-# User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
+*_before_*
+*.backup
+*.bak
+*~
+*.orig
 
-# AWS User-specific
-.idea/**/aws.xml
+# Dated database/test backups
+*.db.before_*
+birds.db.before_*
 
-# Generated files
-.idea/**/contentModel.xml
-.idea
+# ============================================================
+# AvianVisitors regenerated-image working directories
+# ============================================================
 
-# Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+avian/assets/regenerated-backups/
+avian/assets/regenerated-before-processing/
 
-*.pyc
+# Temporary regeneration tracking files
+avian/regenerated-images-to-process.txt
+
+# ============================================================
+# Python temporary files
+# ============================================================
+
 __pycache__/
-*.flac
-.vscode
-model/labels.txt
-datasets/
-birdnet.conf
-IdentifiedSoFar.txt
-IdentifiedSoFar.txt.bak
-Birders_Guide_Installer_Configuration.txt
-birdnet/
-templates/*.service
-# Written per-host by install_birdnet_mount(), with the filename derived from
-# RECS_DIR - same reason the generated .service units above are not committed.
-templates/*.mount
-scripts/*.txt
-scripts/*.db
-analyzing_now.txt
-apprise.txt
-body.txt
-BirdDB.txt
-exclude_species_list.txt
-firstrun.ini
-HUMAN.txt
-include_species_list.txt
-whitelist_species_list.txt
-/nbproject/private/
+*.py[cod]
+*.pyo
+
+# ============================================================
+# OS/editor temporary files
+# ============================================================
+
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
 
-# --- AvianVisitors: local-only material, deliberately not shipped ---
-# Generated publication archives and local database snapshots
-/.avian/
-/.backups/
-# Claude Code session data
-.claude/
-# Large source imagery stays local. These two reviewed blossom plates are
-# production stamp assets and remain eligible for version control.
-avian/assets/references/*
-!avian/assets/references/sparrow-blossom-single-v2.png
-!avian/assets/references/sparrow-blossom-pair-v2.png
-# Local recordings and spectrograms used while tuning release previews
-avian/frontend/assets/recording-previews/
-# Superseded assets retained locally
-avian/assets/_legacy/
+# ============================================================
+# Samsung Frame local authentication/state
+# ============================================================
 
-# --- Generated at install time, never committed ---
-# get_tf_whl() curls the wheel matching this machine's arch and Python version,
-# then rewrites requirements.txt into requirements_custom.txt pointing at it.
-# Both are per-machine build output; committing either would pin every install
-# to whatever hardware happened to produce them.
-tflite_runtime-*.whl
-requirements_custom.txt
+frame/samsung-data/
+
+# ============================================================
+# BirdNET-Pi local runtime/configuration data
+# ============================================================
+
+birdnet.conf
+body.txt
+scripts/birds.db
+BirdDB.txt
+
+# Script backup copies
+*_backup.py
+
+# Generated Samsung Frame exports
+avian/frame-export/
+
+# Downloaded Python package artifacts
+*.whl

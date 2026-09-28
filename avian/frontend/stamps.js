@@ -2338,7 +2338,24 @@ document.documentElement.setAttribute('data-stamps-stage', 'fx-ready');
     Colaptes:'Warblers & Vireos',
     Picoides:'Warblers & Vireos', Dryobates:'Warblers & Vireos',
     Melanerpes:'Warblers & Vireos', Callipepla:'Warblers & Vireos',
-    Zenaidura:'Doves & Pigeons'
+    Zenaidura:'Doves & Pigeons',     Aegithalos: 'Chickadees & Titmice',
+    Cyanistes: 'Chickadees & Titmice',
+    Parus: 'Chickadees & Titmice',
+
+    Chloris: 'Finches',
+    Fringilla: 'Finches',
+    Erithacus: 'Flycatchers',
+    Muscicapa: 'Flycatchers',
+
+    Garrulus: 'Crows & Jays',
+
+    Glaucidium: 'Owls',
+
+    Phylloscopus: 'Warblers & Vireos',
+
+    Anthus: 'Sparrows',
+    Motacilla: 'Sparrows',
+    Prunella: 'Sparrows',
   };
 
   /* Latin family per group, for the small taxonomic line some designs print. */
@@ -2389,11 +2406,20 @@ document.documentElement.setAttribute('data-stamps-stage', 'fx-ready');
     // issue rather than reviving a retired template or assigning by hash.
     return TPL.ribbonbird || TPL.geo || null;
   }
-  function familyOf(sci) { return groupFor(sci) || 'Other'; }
-  function latinOf(sci) {
+  function taxonomyOf(sci) {
+    var database = window.LV_BIRD_TAXONOMY || {};
+    return database[sci] || null;
+}
+function familyOf(sci) {
+    var taxonomy = taxonomyOf(sci);
+    return (taxonomy && taxonomy.family_lv) || groupFor(sci) || 'Other';
+}
+function latinOf(sci) {
+    var taxonomy = taxonomyOf(sci);
+    if (taxonomy && taxonomy.family_latin) return taxonomy.family_latin;
     var g = groupFor(sci);
     return (g && GROUP_LATIN[g]) || '';
-  }
+}
 
   /* ---- Every design is drawn at ONE natural width, because each one's
      type sizes are tuned in px at that width; re-laying a design out
