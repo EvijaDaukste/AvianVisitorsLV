@@ -5445,7 +5445,7 @@
           + ' data-edu-state-revision="' + (renderedStateRevision === null ? '' : renderedStateRevision) + '"'
           + ' data-acc="' + (accession[s.sci] || 0) + '"'
           + ' data-fresh="' + (isLifer ? '1' : '0') + '" data-win="' + win + '" data-total="' + total + '">'
-          + (isLifer ? '<span class="lifer-badge" title="new to the life list in this window">lifer</span>' : '')
+          + (isLifer ? '<span class="lifer-badge" title="new to the life list in this window">✨</span>' : '')
           + '<div class="stat">' + statRows + '</div>'
           + '<div class="img-wrap">'
           + '<img loading="lazy" decoding="async" src="' + escHtml(imageSrc) + '" alt="' + escHtml(common) + '">'
@@ -5466,10 +5466,10 @@
       // The card stays the click target so the detail modal, highlighting
       // and deep links keep working untouched.
       var bird = {
-        sci: s.sci, com: s.com, index: accession[s.sci] || 0, count: total,
+        sci: s.sci, com: s.lv || s.com, index: accession[s.sci] || 0, count: total,
         placeholder: needsArt
       };
-      var renderKey = [s.sci, s.com || '', accession[s.sci] || 0, total,
+      var renderKey = [s.sci, s.lv || s.com || '', accession[s.sci] || 0, total,
         renderedScopeId, renderedScopeRevision, renderedStateKey, renderedStateRevision,
         detectionId || '', needsArt ? 'todo' : 'stamp', fresh,
         artRevision(s.sci, SKETCH_VERSION)].join('|');

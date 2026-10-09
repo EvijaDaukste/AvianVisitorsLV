@@ -2663,7 +2663,7 @@ function latinOf(sci) {
     var commonParts = splitName(bird.com || bird.sci);
     var gullMeta = gullMetaLayout(bird.sci, lat);
     var lineType = lineScreenType(bird.com || bird.sci, bird.index);
-    var commonName = bird.com || bird.sci;
+    var commonName = (window.LV_BIRD_NAMES && window.LV_BIRD_NAMES[bird.sci]) || bird.com || bird.sci;
     var placeholderArt = !!bird.placeholder;
     /* Optical fit, not a fixed font size.  These capacities are deliberately
        conservative: the review matrix contains the longest names we ship and
